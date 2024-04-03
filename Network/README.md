@@ -24,3 +24,74 @@
 - 공개키 방식으로 대칭키를 전달 그리고 이 대칭키로 암호화 복호화 수행후 서버와 브라우저간 통신
 
 </div></details>
+
+<br>
+<details>
+<summary>RESTful</summary>
+<div>
+
+### RESTful API 라는 말도 있는데 이건 무엇인가?
+- API?
+  - 두 애플리케이션이 서로 통신하는 방법을 정의
+- REST 아키텍처 스타일로 요청과 응답하는 API
+
+### REST란?
+- URI만 봐도 무엇인지 한눈에 파악 가능
+- ex
+  - GET /student/class
+  - GET /student/class/1
+  - DELETE /student/class/1
+
+### REST ful?
+- REST의 제약을 준수했다.
+
+## REST 정의
+- REST(Representational State Transfer)
+  - 서버와 클라이언트 간 통신 방식 중 하나
+  - 자원을 이름으로 구분하고
+  - 자원의 상태를 주고 받는다
+### REST 구현?
+- 자원: URI
+  - /student/class
+- 행위 또는 상태 : HTTP METHOD
+  - GET/POST/PUT/DELETE
+- 표현: 요청 ACCEPT HEADER
+  - text/html,image/gif 등등
+  - -> 클라이언트 어떤 타입으로 응답 받을지 정하는 것
+
+### URI 규칙?
+- 슬래시 구분자 통해 계층 관계나타냄
+- 언더바 대신 하이픈
+- 대문자 대신 소문자
+- 마지막에는 슬래시 포함 안함
+- 
+
+
+### RESTful 하게 자원을 주고받는 법?
+### HTTP method
+- GET
+  - 자원을 검색할 때
+- POST
+  - 자원을 생성할 때
+- PUT
+  - 자원을 업데이트할 때
+  - 보내지않은 정보는 null
+- PATCH
+  - 자원을 업데이트할 때
+  - 보내지않은 데이터는 기존 데이터 유지
+- DELETE
+  - 자원을 삭제할 때
+
+### HTTP 상태 코드
+- 1xx
+  - 조건부 응답
+- 2xx
+  - 성공
+- 3xx
+  - 리다이렉션
+- 4xx
+  - 클라이언트 오류
+- 5xx
+  - 서버 오류
+
+</div></details>
