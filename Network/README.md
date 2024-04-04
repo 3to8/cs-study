@@ -99,3 +99,71 @@ TCP는 혼잡제어, 흐름제어, 오류제어를 통해 신뢰성을 보장하
 * HTTP1, HTTP2는 TCP로 통신하였지만 HTTP3부터는 UDP가 기본 프로토콜로 지정되었습니다.
 </details>
 
+### 3way handshake
+
+<details>
+<summary>3way handshake란?</summary>
+
+<br>
+
+<div>
+TCP/IP 프로토콜을 이용해 통신하기 전에 통신을 보장하기 위해 상대방과 가상의 회선을 수립하는 과정입니다.
+</div>
+
+#### SYN
+* 연결을 설정합니다.
+* Sequence Number를 랜덤으로 설정해 세션을 연결하는 데 사용됩니다.
+  * Connnection시 Sequence Number를 랜덤하게 설정하는 이유는 포트의 수가 유한하기 때문에 이후에 다시 재사용합니다.
+  * 그 경우 순차적인 번호를 사용하게 되면 이전 Connection에서 전송된 패킷으로 인식할 수 있기 때문에 랜덤한 값을 사용합니다.
+
+#### ACK
+* 응답을 확인합니다. 패킷을 전송받았다는 것을 의미합니다.
+* 첫 번째 세그먼트를 제외하고 나머지 모든 세그먼트 들의 ACK 비트는 1로 설정됩니다.
+
+#### FIN
+* 연결을 종료할 때 사용하며 더이상 전송할 데이터가 없음을 의미합니다.
+</details>
+
+<br>
+
+<details>
+<summary>3way handshake 과정</summary>
+
+<br>
+
+<div>
+
+1. Client가 Server로 SYN 플래그를 전송합니다.
+2. Server는 Listen 상태에서 SYN 플래그를 받아 SYN-RECV 상태로 바뀌며 SYN + ACK 플래그를 전송합니다.
+3. Client는 SYN + ACK 플래그를 받아 ACK 플래그로 응답하며 연결이 성립됩니다.
+
+</div>
+
+#### 서버 상태
+* CLOSED : 포트가 닫혀 있는 상태
+* LISTEN : 포트가 열려 연결 요청을 대기중인 상태
+* SYN_RECV : SYNC 요청을 받고 상대의 응답을 기다리는 상태
+* ESTABLISHED : 포트가 연결된 상태
+* TIME-WAIT : FIN 플래그를 받은 후 일정 시간동안 잉여 패킷을 기다리는 상태
+</details>
+
+### 4way handshake
+
+<details>
+<summary>4way handshake</summary>
+
+<br>
+
+<div>
+연결되어 있는 세션을 종료하기 위해 수행되는 절차입니다.
+
+1. Client가 종료를 위해 FIN 플래그를 전송합니다.
+   * Client의 상태가 FIN-WAIT-1로 변경됩니다.
+2. 서버에서 ACK 응답을 보냅니다. 이후 서버는 CLOSE_WAIT, Client는 FIN-WAIT-2 상태로 변경됩니다.
+3. 서버에서 FIN 플래그를 보냅니다.
+4. Client가 ACK 응답을 보냅니다.
+   * 의도치 않은 에러로 연결이 데드락에 빠지는것을 방지하기 위해 TIME-WAIT 상태로 변경됩니다.
+   * 일정 시간이 지난 후 CLOSED 상태가 됩니다.
+* 
+</div>
+</details>
