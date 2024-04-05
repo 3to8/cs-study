@@ -92,7 +92,86 @@
 
 </details>
 
+### Binary Search
 
+<details>
+<summary>이진 탐색이란?</summary>
 
+<br>
 
+<div>
+이진 탐색은 문제의 답이 이분적일 때 사용할 수 있는 기법입니다.
+이진 탐색은 정렬되어 있는 데이터 중 탐색 볌위를 절반씩 좁혀가며 데이터를 찾는 방법입니다.
 
+O(N)의 시간복잡도를 가지는 순차 탐색과는 다르게 O(logN)의 시간복잡도를 가집니다.
+정렬되어 있는 배열이나 리스트, 이진 탐색 트리에서 사용할 수 있습니다.
+</div>
+</details>
+
+<br>
+
+<details>
+<summary>배열에서의 이진탐색 과정</summary>
+
+<br>
+
+<div>
+정렬되어 있는 배열의 중간값과 찾고자하는 데이터를 비교합니다.
+
+데이터가 중간값보다 크다면 탐색 범위의 시작점을 중간값 오른쪽 인덱스로 설정합니다.
+데이터가 중간값보다 작다면 탐색 범위의 끝점을 중간값 왼쪽 인덱스로 설정합니다.
+이후 작아진 탐색 범위에서 중간값을 비교하는 것을 반복합니다.
+데이터가 중간값과 일치하거나 배열에 존재하지 않는다면 검색을 종료합니다.
+</div>
+</details>
+
+<details>
+<summary>배열에서의 이진탐색 구현</summary>
+
+<br>
+
+<div>
+반복문을 사용하거나 재귀적으로 구현할 수 있습니다.
+</div>
+
+- Recursion
+```java
+
+public int binarySearch(int[] arr, int target, int low, int high) {
+    int middle = low + ((high - low) / 2);
+    
+    if (low > high)
+        return -1;
+    
+    if (arr[middle] == target)
+        return middle;
+    else if (arr[middle] > target)
+        return binarySearch(arr, target, low, middle - 1);
+    else 
+        return binarySearch(arr, target, middle + 1, high);
+}
+```
+
+- 반복문
+```java
+
+public int binarySearch(int[] arr, int target) {
+    int low = 0;
+    int high = arr.length - 1;
+    
+    while (low <= high) {
+
+        int middle = low + ((high - low) / 2);
+        
+        if (arr[middle] == target)
+            return middle;
+        else if (arr[middle] > target)
+            high = middle - 1;
+        else 
+            low = middle + 1;
+    }
+    
+    return -1;
+}
+```
+</details>
