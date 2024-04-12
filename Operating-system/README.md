@@ -266,6 +266,7 @@ CPU를 강제로 점유할 수 있습니다.
 </div>
 
 #### 모드
+CPU가 명령어를 실행하는 모드는 다음과 같습니다.
 * 유저모드
   * 사용자가 접근할 수 있는 영역을 제한하고 프로그램의 자원에 함부로 접근하지 못하는 모드입니다.
   * 프로세스를 실행하고 코드를 작성하는 행동들이 여기에 해당합니다.
@@ -275,3 +276,97 @@ CPU를 강제로 점유할 수 있습니다.
 * System Call을 이용해 유저모드에서 커널모드로 요청을 보낼 수 있고,
 커널모드에서 유저모드로 응답을 반환할 수 있습니다.
 </details>
+
+### Mutex, Semaphore
+
+<details>
+<summary>Mutex</summary>
+
+<br>
+
+<div>
+Mutex란 Mutual Exclution의 약어로 공유 자원의 일관성을 위해
+한번에 한 프로세스나 쓰레드만 접근하도록 하는 방법입니다.
+
+Mutex의 특징으로는 Boolean Type의 Lock 변수를 가지고 있고
+Non-Busy-Wait 방식으로 동작합니다.
+</div>
+
+#### Wait
+* Busy-Wait
+  * CPU의 자원을 소유한 상태로 대기
+  * SpinLock (Lock이 반환될 때까지 반복해서 확인하며 대기함)
+* Non-Busy-Wait
+  * CPU의 자원을 반납한 후 대기
+</details>
+
+<br>
+
+<details>
+<summary>Semaphore란?</summary>
+
+<br>
+
+<div>
+여러 프로세스나 쓰레드가 동유자원에 동시에 접근할 수 있는 정수 변수입니다.
+
+Semaphore의 특징은 한개 이상의 프로세스나 쓰레드가 동시에 접근이 가능하며 Non-Busy-Wait 방식으로 동작합니다.
+</div>
+
+#### 구성
+
+* S라는 정수 변수를 가지며 P와 V라는 명령에 의해 접근할 수 있습니다.
+* P는 임계 구역에 들어가기 전, V는 임계영역에 나올때 수행됩니다.
+* S 변수를 수정하는 연산은 원자성을 만족해야합니다.
+  * 한 프로세스가 세마포어 값을 변경할 때 다른 프로세스가 동시에 값을 변경해서는 안됩니다.
+</details>
+
+<br>
+
+<details>
+<summary>Semaphore 종류</summary>
+
+<br>
+
+<div>
+큐에 연결된 프로세스들을 깨울 때 FIFO 정책을 사용하는 강성 세마포어와
+순서를 명시하지 않은 약성 세마포어가 존재합니다.
+</div>
+</details>
+
+<br>
+
+<details>
+<summary>유형</summary>
+
+<br>
+
+<div>
+카운팅 세마포어(Counting Semaphore)와 이진 세마포어(Binary Semaphore)가 있습니다.
+<br>
+카운팅 세마포어는 자원의 값이 여러 개인 세마포어입니다.
+카운팅 세마포어의 값은 0~N 사이일 수 있으며 N은 임계 영역에 접근할 수 있는 프로세스의 수 입니다.
+카운팅 세마포어는 여러 프로세스가 공유 자원에 동시에 접근이 가능하므로 상호 배제가 보장되지 않습니다.
+
+<br>
+이진 세마포어는 값이 0과 1만 가지는 세마포어입니다. Mutex의 동작과 유사합니다.
+</div>
+</details>
+
+<br>
+
+<details>
+<summary>Mutex vs Binary Semaphore</summary>
+
+<br>
+
+<div>
+Mutex의 경우 Lock를 획득한 프로세스나 쓰레드만 락을 해제할 수 있지만
+Semaphore의 경우 Lock을 설정한 프로세스가 아니더라도 해당 락을 해제할 수 있습니다.
+
+
+</div>
+</details>
+
+* Reference
+  * https://www.geeksforgeeks.org/difference-between-counting-and-binary-semaphores/
