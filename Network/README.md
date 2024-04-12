@@ -166,3 +166,114 @@ TCP/IP 프로토콜을 이용해 통신하기 전에 통신을 보장하기 위�
    * 일정 시간이 지난 후 CLOSED 상태가 됩니다.
 </div>
 </details>
+
+### Cookie
+
+<details>
+<summary>Cookie란?</summary>
+
+<br>
+
+<div>
+서버가 사용자의 웹 브라우저에 전송하는 데이터입니다.
+브라우저에 저장된 쿠키는 동일한 서버에 다시 요청 시 함께 전송합니다.
+Stateless한 특성이 있는 HTTP에서 상태 정보를 기억하기 위해 사용합니다.
+</div>
+</details>
+
+#### 전송 과정
+* 서버에서 응답을 전송할 때 Set-Cookie 헤더에 데이터를 넣어 같이 전송합니다.
+* 응답을 받은 브라우저는 쿠키 저장소에 Cookie를 Key-Value 형태로 저장합니다.
+* 이 후 같은 서버로 요청을 보낼 때 요청의 Cookie 헤더에 데이터를 넣어 같이 전송합니다.
+
+
+* Cookie는 HTTP 요청마다 쿠키를 넣어서 전송하므로 네트워크 트래픽에 부담을 줄 수 있습니다.
+<br>
+
+<details>
+<summary>Cookie의 종류</summary>
+
+<br>
+
+<div>
+쿠키는 세션쿠키와 영속적인 쿠키가 있습니다.
+
+세션 쿠키는 수명이 지정되지 않은 쿠키로 브라우저가 종료될 때 같이 삭제됩니다.
+영속적인 쿠키는 수명이 지정되어 있는 쿠키로 `Expire`, `Max-Age`에 명시된 기간 이후 삭제됩니다.
+</div>
+</details>
+
+<details>
+<summary>Cookie 옵션</summary>
+
+<br>
+
+<div>
+Cookie의 옵션에는 범위를 지정할 수 있는 Domain, Path,
+보안과 관련된 Secure, HttpOnly, 수명을 지정하는 Max-Age, Expire가 있습니다.
+</div>
+
+#### Domain
+* 브라우저에 저장된 Cookie는 생성된 Domain과 일치하는 경우에만 전달합니다.
+  * ex) ex1.hun.com에서 생성한 Cookie는 ex2.hun.com에 요청할 때 전송하지 않습니다.
+  * Domain을 .hun.com으로 설정 시 두 도메인 모두 전송할 수 있습니다.
+
+#### Path
+* 같은 Domain에서 Path에 따라 Cookie를 전송할지 결정할 수 있습니다.
+  * ex) path를 /public 으로 설정 시 /private 으로는 전송하지 않습니다.
+
+#### Max-Age
+* 쿠키의 수명을 초 단위로 설정할 수 있습니다.
+
+#### Expire
+* 쿠키의 수명을 특정요일로 설정할 수 있습니다.
+
+<br>
+
+* Max-Age와 Expire가 같이 설정되어 있을 경우 Max-Age의 값으로 설정됩니다.
+  * 두 속성을 모두 사용하는 이유는 HTTP 1.0에서는 Max-Age를 지원하지 않으므로 하위 호환성을 위해서 같이 사용합니다.
+
+#### Secure
+* Secure 옵션을 통해 HTTPS 요청에만 전송하도록 설정할 수 있습니다.
+
+#### HTTPOnly
+* HTTP 뿐 아니라 Javascript에서도 Cookie를 조회, 수정이 가능합니다.
+  * document.cookie
+* HTTPOnly 옵션을 통해 Cookie의 값을 Javascript에서 조회, 수정을 막을 수 있어 쿠키가 위조를 방지할 수 있습니다.
+</details>
+
+### Session
+
+<details>
+<summary>Session 이란?</summary>
+
+<br>
+
+<div>
+상태가 없는 HTTP에서 일정시간동안 여러 요청을 하나의 상태로 유지시키는 기술입니다.
+브라우저에 저장되는 Cookie와는 다르게 서버에 저장됩니다.
+클라이언트를 구분하기 위해 SESSION ID를 부여해 브라우저를 종료할 때 까지 인증 상태를 유지합니다.
+</div>
+
+#### Session 동작방식
+1. SESSIONID 발급
+2. 클라이언트가 요청 시 SESSIONID를 서버에 전달해서 요청 
+3. SESSIONID에 일치하는 데이터를 가져와 응답
+
+
+* Session은 정보를 서버에 저장하므로 사용자가 많아질수록 많은 메모리를 차지하게 됩니다.
+</details>
+
+<br>
+
+<details>
+<summary>Cookie, Session 차이</summary>
+
+<br>
+
+<div>
+Session도 Cookie를 사용하므로 동작은 비슷하지만 Cookie는 정보를 브라우저에 저장하고 Session은 서버에 저장합니다.
+보안 면에서는 Cookie보다 Session이 우수하지만 요청 속도는 Cookie가 더 빠릅니다.
+</div>
+</details>
+
