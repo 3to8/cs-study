@@ -118,3 +118,55 @@ Unchecked Exception은 런타인 시점에 탐지되며 RuntimeException의 하�
 예외처리를 강제하지 않습니다. IllegalArgumentException, NullPointerException, IndexOutOfBoundsException 등이 있습니다.
 </div>
 </details>
+
+### Optional
+
+<details>
+<summary>Optional</summary>
+
+<br>
+
+<div>
+Optional은 Java에서 Return값이 없을수도 있음을 의미합니다.
+Null이 들어갈 수 있는 값을 감싸는 Wrapper Class입니다.
+Optional을 통해 NullPointerException이 발생하지 않도록 할 수 있습니다.
+</div>
+
+#### 주의 사항 
+
+1. Optional의 return 값에 null을 사용하지 말 것
+   * Null을 방지하려고 사용하는 Optional의 사용 목적에 어긋난다.
+   * 내부 값을 null로 초기화한 싱글톤 객체인 Optional.empty()를 사용하자.
+2. Optional을 필드, 메소드 인자, 컬렉션, 맵의 키에 사용하지 말 것
+   * Optional이란 반환값이 없을 수 있다는 것을 의미하므로 사용 목적에 어긋남.
+   * Collection에서는 빈 컬렉션을 반환할 수 있으므로 불필요한 비용을 줄일 수 있다.
+3. Primitive Type에 Optional을 사용하기보다 OptionalInt, OptionalLong, OptionalDouble의 사용을 고려하자.
+   * Optional로 사용할 때 Boxing, UnBoxing 과정을 통해 오버헤드가 발생한다.
+   * wrapper 클래스가 아닌 primitive type을 내부 필드로 갖기 때문에 불필요한 오버헤디를 줄일 수 있다.
+</details>
+
+<br>
+
+<details>
+<summary>Optional 장단점</summary>
+
+<br>
+
+<div>
+Optional은 Null을 직접 다루지 않아도 되며 Null Check를 줄여준다는 장점이 있습니다.
+또한 해당 값이 없을수도 있다는 것을 직접적으로 명시할 수 있습니다.
+
+<br>
+
+단점으로는 값의 여부를 확인하지 않을 경우 NullPointerException이 아닌 NoSuchElementException이 발생할 수 있습니다.
+또한 Wrapper 클래스로 감싸기 때문에 Optionanl 객체를 저장하고 접근하는 Overhead가 증가합니다.
+</div>
+</details>
+
+### Serialization
+
+<details>
+<summary>직렬화</summary>
+
+</details>
+
